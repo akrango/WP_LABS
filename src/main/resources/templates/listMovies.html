@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Movie Ticket Order page - Welcome and choose a Movie</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to our Movie Ticket Shop App</h1>
+</header>
+<main>
+
+    <form th:method="post" th:action="@{/movies}">
+        <span>Search by name and rating</span><br/>
+        <input type="text" name="search" id="searchText">
+        <input type="number" name="number" id="searchRating">
+        <input type="submit" value="Search">
+    </form>
+
+    <h2>Choose movie:</h2>
+    <!-- Display radio buttons for each movie,
+            the value should be the movie title
+            and the displayed text should be Title: <movie_title>, Summary:<movie_summary>, Rating: <movie_rating> -->
+
+    <form th:method="post" th:action="@{/ticketOrder}">
+        <ul th:each="movie: ${movies}">
+            <li>
+                <input type="radio" th:value="${movie.getTitle()}" th:name="selectedMovie" />
+                <span th:text="'Title:' + ${movie.getTitle()} + ' Summary: ' + ${movie.getSummary()} + ' Rating:' + ${movie.getRating()}"></span>
+            </li>
+        </ul>
+
+        <h2>Choose number of tickets:</h2>
+        <label for="clientName">Name</label>
+        <input type="text" name="clientName" id="clientName"><br/>
+        <label for="numTickets">Number of Tickets</label>
+        <input type="number" name="numTickets" min="1" max="10" id="numTickets"><br/>
+        <br/>
+        <input type="submit" value="Submit">
+    </form>
+
+
+</main>
+</body>
+</html>
