@@ -9,9 +9,11 @@
             width: 800px;
             margin: auto;
         }
+
         table {
-            width:100%;
+            width: 100%;
         }
+
         table, td, th {
             border: 1px solid black;
             padding: 3px 2px;
@@ -23,29 +25,44 @@
     <header>
         <h1>Movie Order page - Order confirmation </h1>
     </header>
-    <table>
-        <tr>
-            <th colspan="2">
-                Your Order Status
-            </th>
-        </tr>
-        <tr>
-            <td><b>Client Name </b></td>
-            <td th:text="${ticket.getClientName()}"></td>
-        </tr>
-        <tr>
-            <td><b>Client IP Address</b></td>
-            <td th:text="${ticket.getClientAddress()}"></td>
-        </tr>
-        <tr>
-            <td><b>Ticket for Movie</b></td>
-            <td th:text="${ticket.getMovieTitle()}"></td>
-        </tr>
-        <tr>
-            <td><b>Number of tickets</b></td>
-            <td th:text="${ticket.getNumberOfTickets()}"></td>
-        </tr>
-    </table>
+    <ul th:each="ticket: ${tickets}">
+        <li>
+            <table>
+                <tr>
+                    <th colspan="2">
+                        Your Order Status
+                    </th>
+                </tr>
+                <tr>
+                    <td><b>Client Name </b></td>
+                    <td th:text="${ticket.getClientName()}"></td>
+                </tr>
+                <tr>
+                    <td><b>Client IP Address</b></td>
+                    <td th:text="${ticket.getClientAddress()}"></td>
+                </tr>
+                <tr>
+                    <td><b>Ticket for Movie</b></td>
+                    <td th:text="${ticket.getMovieTitle()}"></td>
+                </tr>
+                <tr>
+                    <td><b>Number of tickets</b></td>
+                    <td th:text="${ticket.getNumberOfTickets()}"></td>
+                </tr>
+            </table>
+        </li>
+    </ul>
+</section>
+<section>
+    <form th:method="post" th:action="@{/filteredTicketOrders}">
+        <span>Search by movie title and rating</span><br/>
+        <input type="text" name="movieTitle" id="searchText">
+        <input type="number" name="numOfTickets" id="searchNumOfTickets">
+        <input type="submit" value="Search">
+    </form>
+    <form th:method="post" th:action="@{/movies}">
+        <input type="submit" value="Back">
+    </form>
 </section>
 </body>
 </html>

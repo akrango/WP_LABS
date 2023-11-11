@@ -12,11 +12,12 @@ import java.util.List;
 public class DataHolder {
 
     public static List<Movie> movies=null;
-    public static TicketOrder ticketOrder=null;
+    public static List<TicketOrder> ticketOrders=null;
 
     @PostConstruct
     public void init(){
         movies=new ArrayList<>();
+        ticketOrders=new ArrayList<>();
         movies.add(new Movie("Title1","Summary1",4.5));
         movies.add(new Movie("Title2","Summary2",3.5));
         movies.add(new Movie("Title3","Summary3",2.0));

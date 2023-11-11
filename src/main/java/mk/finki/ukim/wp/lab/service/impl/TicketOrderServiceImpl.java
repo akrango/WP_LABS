@@ -5,6 +5,8 @@ import mk.finki.ukim.wp.lab.repository.TicketOrderRepository;
 import mk.finki.ukim.wp.lab.service.TicketOrderService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TicketOrderServiceImpl implements TicketOrderService {
 
@@ -25,7 +27,12 @@ public class TicketOrderServiceImpl implements TicketOrderService {
 
 
     @Override
-    public TicketOrder getTicket() {
-        return ticketOrderRepository.getTicketOrder();
+    public List<TicketOrder> getTickets() {
+        return ticketOrderRepository.getTicketOrders();
+    }
+
+    @Override
+    public List<TicketOrder> getTicketsByMovieAndNumOfTickets(String movieTitle, String numOfTickets) {
+        return ticketOrderRepository.getTicketsByMovieAndNumOfTickets(movieTitle,numOfTickets);
     }
 }

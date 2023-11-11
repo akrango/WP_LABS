@@ -14,6 +14,7 @@ import org.thymeleaf.web.IWebExchange;
 import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(urlPatterns = "/ticketOrder")
 public class TicketOrderServlet extends HttpServlet {
@@ -32,8 +33,11 @@ public class TicketOrderServlet extends HttpServlet {
                 .buildExchange(req, resp);
 
         WebContext context =  new WebContext(webExchange);
+        String movieTitle= (String) req.getSession().getAttribute("movieTitle");
+        String numOfTickets= (String) req.getSession().getAttribute("numOfTickets");
+        List<TicketOrder> ticketOrders=ticketOrderService.getTicketsByMovieAndNumOfTickets(movieTitle,numOfTickets);
 
-        context.setVariable("ticket", ticketOrderService.getTicket());
+        context.setVariable("tickets", ticketOrders);
         springTemplateEngine.process(
                 "orderConfirmation.html",
                 context,
@@ -44,12 +48,15 @@ public class TicketOrderServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getSession().setAttribute("movieTitle",req.getParameter("movieTitle"));
+        req.getSession().setAttribute("numOfTickets",req.getParameter("numOfTickets"));
+
         String clientName=req.getParameter("clientName");
         String movieTitle=req.getParameter("selectedMovie");
         String clientAddress=req.getRemoteAddr();
         String numTickets= req.getParameter("numTickets");
-        this.ticketOrderService.placeOrder(movieTitle,clientName,clientAddress,numTickets);
-        if (DataHolder.ticketOrder==null){
+        TicketOrder ticket =this.ticketOrderService.placeOrder(movieTitle,clientName,clientAddress,numTickets);
+        if (ticket==null){
             resp.sendRedirect("/movies");
             return;
         }
