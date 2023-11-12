@@ -8,5 +8,5 @@ public interface TicketOrderService {
     TicketOrder placeOrder(String movieTitle, String clientName, String address, String numberOfTickets);
     List<TicketOrder> getTickets();
 
-    List<TicketOrder> getTicketsByMovieAndNumOfTickets(String movieTitle, String rating);
+    List<TicketOrder> getTicketsByMovieAndNumOfTickets(String movieTitle, String numOfTickets);
 }

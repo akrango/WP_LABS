@@ -15,14 +15,14 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/filteredTicketOrders")
+@WebServlet(urlPatterns = "/servlet/filteredTicketOrders")
 public class FilteredTicketOrders extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().setAttribute("movieTitle",req.getParameter("movieTitle"));
         req.getSession().setAttribute("numOfTickets",req.getParameter("numOfTickets"));
-        resp.sendRedirect("/ticketOrder");
+        resp.sendRedirect("/servlet/ticketOrder");
     }
 }
 

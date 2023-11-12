@@ -18,7 +18,7 @@ public class TicketOrderServiceImpl implements TicketOrderService {
 
     @Override
     public TicketOrder placeOrder(String movieTitle, String clientName, String address, String numberOfTickets) {
-        if(numberOfTickets.isEmpty()){
+        if(numberOfTickets.isEmpty() || movieTitle==null || movieTitle.isEmpty() || clientName.isEmpty()){
             return null;
         }
         TicketOrder ticketOrder=new TicketOrder(movieTitle,clientName,address, Long.parseLong(numberOfTickets));

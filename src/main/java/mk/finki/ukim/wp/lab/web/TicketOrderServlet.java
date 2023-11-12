@@ -16,7 +16,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/ticketOrder")
+@WebServlet(urlPatterns = "/servlet/ticketOrder")
 public class TicketOrderServlet extends HttpServlet {
     private final TicketOrderService ticketOrderService;
     private final SpringTemplateEngine springTemplateEngine;
@@ -57,9 +57,9 @@ public class TicketOrderServlet extends HttpServlet {
         String numTickets= req.getParameter("numTickets");
         TicketOrder ticket =this.ticketOrderService.placeOrder(movieTitle,clientName,clientAddress,numTickets);
         if (ticket==null){
-            resp.sendRedirect("/movies");
+            resp.sendRedirect("/servlet/movies");
             return;
         }
-        resp.sendRedirect("/ticketOrder");
+        resp.sendRedirect("/servlet/ticketOrder");
     }
 }

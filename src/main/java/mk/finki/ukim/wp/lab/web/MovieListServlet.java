@@ -16,7 +16,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/movies")
+@WebServlet(urlPatterns = "/servlet/movies")
 public class MovieListServlet extends HttpServlet {
     private final MovieService movieService;
 
@@ -57,6 +57,6 @@ public class MovieListServlet extends HttpServlet {
         String rating= req.getParameter("number");
         req.getSession().setAttribute("searchText",text);
         req.getSession().setAttribute("searchRating",rating);
-        resp.sendRedirect("/movies");
+        resp.sendRedirect("/servlet/movies");
     }
 }
